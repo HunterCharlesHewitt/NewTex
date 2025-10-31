@@ -5,7 +5,13 @@
     <title>NewTex</title>
 </head>
 <body>
-<form action="/">
+{% if "\mathbf" in latex %}
+<b>{{latex}}</b>
+{% else %}
+{{ latex }}
+{% endif %}
+
+<form action="/submit_latex" method="post">
   <label for="fname">Latex:</label><br>
   <input type="text" id="fname" name="Latex" value="\frac{1}{2}"><br>
   <input type="submit" value="Submit">
