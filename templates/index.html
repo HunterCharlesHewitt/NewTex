@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>NewTex</title>
-</head>
-<body>
-{% if "\mathbf" in latex %}
-<b>{{latex}}</b>
-{% else %}
-{{ latex }}
-{% endif %}
 
-<form action="/submit_latex" method="post">
-  <label for="fname">Latex:</label><br>
-  <input type="text" id="fname" name="Latex" value="\frac{1}{2}"><br>
-  <input type="submit" value="Submit">
-</form>
+<head>
+  <meta charset="UTF-8">
+  <title>NewTex</title>
+</head>
+
+<body>
+  {% if "\mathbf" in latex %}
+  <b>{{latex}}</b>
+  {% else %}
+  {{ latex }}
+  {% endif %}
+
+  <form action="/submit_latex" method="post">
+    <label for="fname">Latex:</label><br>
+    <input type="text" name="Latex" id="Latex" placeholder="\frac{1}{2}"><br>
+    <input type="submit" value="Submit">
+  </form>
 </body>
+
 </html>
+
+<script>
+  let input = document.getElementById('Latex')
+  input.addEventListener('input', (event) => {
+    console.log(event.target.value)
+    if (event.target.value.includes('text') && !(event.target.value.includes('\\text'))) {
+      event.target.value = event.target.value.replace('text', '\\text{}')
+    }
+  })
+</script>
